@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<table border="15px" cellpadding="5px" cellspacing="5px" id="datatable">
+<tr>
+    <th>id</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>email</th>
+</tr>
+
+
+
+</table>
+<button id="btnsend">click to send</button>
+<script>
+    fetch("http://localhost:8080/api/users",{
+        method:"GET"
+    }).then((res)=>{
+        return res.json();
+    }).then((json)=>{
+        json.map((key ,index)=>{
+
+           document.querySelector("#datatable").innerHTML += `<tr>
+    <td>${key.id}</td>
+    <td>${key.first_name}</td>
+    <td>${key.last_name}</td>
+    <td>${key.email}</td>
+
+</tr>`
+            
+        })
+        
+    })
+    document.querySelector("#btnsend").addEventListener("click" , ()=>{
+        fetch("http://localhost:8080/api/create", {
+  method: "POST",
+  headers: {
+    "Content-type": "'application/x-www-form-urlencoded'"
+  },
+  body:{
+    a :"sadsad"
+  }
+
+});
+console.log("sended")
+    });
+</script>
+</body>
+</html>
